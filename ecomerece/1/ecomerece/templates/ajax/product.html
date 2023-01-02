@@ -1,0 +1,21 @@
+
+
+{% load static %}
+{% load product_tags %}
+{% for product in page_obj%}
+                                <div class="item item-thumbnail">
+                                    <a href="{{product.get_absolute_url}}" class="item-image">
+                                        <img src="{{product.image.url}}" alt="" />
+                                        <div class="discount">{{product.Discount}}% OFF</div>
+                                    </a>
+                                    <div class="item-info">
+                                        <h4 class="item-title">
+                                            <a href="{{product.get_absolute_url}}">{{product.name}}<br />16GB</a>
+                                        </h4>
+                                        <p class="item-desc">{{product.Tags}}</p>
+                                        <div class="item-price">${% call_sellprice product.price product.Discount %}</div>
+                                        <div class="item-discount-price">${{product.price}}</div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- END item -->{% endfor %}

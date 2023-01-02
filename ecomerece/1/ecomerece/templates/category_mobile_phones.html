@@ -1,0 +1,34 @@
+ 
+                    <!-- END col-6 --> {% for product in products %}
+                    {% if product.category.name == 'Mobile Phones' %}
+                    <!-- BEGIN col-3 --> 
+                    <div class="col-md-3 col-sm-6">
+                        <!-- BEGIN promotion -->
+                       <a href="{{product.get_absolute_url}}">
+                        <div class="promotion bg-blue">
+                            <div class="promotion-image promotion-image-overflow-bottom promotion-image-overflow-top">
+                                <img src="{{product.image.url}}" alt="" />
+                            </div>
+                            <div class="promotion-caption promotion-caption-inverse text-right">
+                                <h2>{{product.Discount}}</h2>
+                                <h4 class="promotion-title">{{product.name}}</h4>
+                                <div class="promotion-price"><small>from</small> $ {% call_sellprice product.price product.Discount %} <span><del>{{product.price}}</del></span> </div>
+                                <p class="promotion-desc">You. At a glance.</p>
+                                <a href="#" class="promotion-btn">View More</a>
+                            </div>
+                        </div>
+                    </a>
+                        <!-- END promotion -->
+                       
+                   
+                    </div>
+                    <!-- END col-3 --> 
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <!-- END row -->
+               
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- END #promotions -->

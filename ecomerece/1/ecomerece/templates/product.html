@@ -1,0 +1,177 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% load product_tags %}
+
+
+        {% block content %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+        {% block Script %}
+        <script>
+            $(document).ready(function(){
+                $(".filter-checkbox").on('click', function(){
+                    var filter_object={};
+                    $(".filter-checkbox").each(function(index,ele){
+                        var filter_value=$(this).val();
+                        var filter_key=$(this).data('filter');
+                        console.log(filter_key,filter_value);
+                        filter_object[filter_key]=Array.from(document.querySelectorAll('input[data-filter='+filter_key+']:checked')).map(function(el){
+                             return el.value;
+                        });
+                    });
+                    $.ajax({
+                        url:'{% url 'filter-data' %}',
+                        data:filter_object,
+                        dataType:'json',			
+                        success:function(res){				
+                            $("#filteredProducts").html(res.data);				
+                        }
+                    });
+                });
+            });
+            </script> {% endblock %}
+            <main>
+        <!-- BEGIN #page-header -->
+        <div id="page-header" class="section-container page-header-container bg-black">
+            <!-- BEGIN page-header-cover -->
+            <div class="page-header-cover">
+                <img src="{% static '/assets/img/apple-cover.jpg' %}" alt="" />
+            </div>
+            <!-- END page-header-cover -->
+            <!-- BEGIN container -->
+            <div class="container">
+                <h1 class="page-header"><b>Apple</b> Product</h1>
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- BEGIN #page-header -->
+       
+        <!-- BEGIN search-results -->
+        <div id="search-results" class="section-container bg-silver">
+            <!-- BEGIN container -->
+           
+                <!-- BEGIN search-container -->
+                <div class="search-container">
+                    <!-- BEGIN search-content -->
+                    <div class="search-content">
+                        <!-- BEGIN search-toolbar -->
+                        <div class="search-toolbar">
+                            <!-- BEGIN row -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                   
+                                </div>
+                                <!-- END col-6 -->
+                                <!-- BEGIN col-6 -->
+                                <div class="col-md-6 text-right">
+                                    <ul class="sort-list">
+                                        <li class="text"><i class="fa fa-filter"></i> Sort by:</li>
+                                        
+                                        {% for section in sections %}
+                                        <li><a href="?ahsan={{section.id}}">{{section.name}}</a></li>
+                                        
+                            
+                                        {% endfor %}
+                                        
+                                    </ul>
+                                </div>
+                                <!-- END col-6 -->
+                            </div>
+                            <!-- END row -->
+                        </div>
+                        <!-- END search-toolbar -->
+                        
+                        <!-- BEGIN search-item-container -->
+                        <div class="search-item-container ">
+                            <!-- BEGIN item-row -->
+                            <div class="item-row" id="filteredProducts" >
+                                <!-- BEGIN item -->{% for product in products %}
+                                <div class="item item-thumbnail" >
+                                    <a href="{{product.get_absolute_url}}" class="item-image">
+                                        <img src="{{product.image.url}}" alt="" />
+                                        <div class="discount">{{product.Discount}}% OFF</div>
+                                    </a>
+                                    <div class="item-info">
+                                        <h4 class="item-title">
+                                            <a href="{{product.get_absolute_url}}">{{product.name}}<br />16GB</a>
+                                        </h4>
+                                        <p class="item-desc">{{product.Tags}}</p>
+                                        <div class="item-price">${% call_sellprice product.price product.Discount %}</div>
+                                        <div class="item-discount-price">${{product.price}}</div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- END item -->{% endfor %}
+                              
+                            </div>
+                            <!-- END item-row -->
+                           
+                        </div>
+                        <!-- END search-item-container --> 
+                        <!-- BEGIN pagination -->
+                        
+                               
+                                
+                                
+        {% if page_obj.has_next %}
+        <div class="text-center">
+            <ul class="pagination m-t-0">
+    
+                                <li><a href="?page={{ page_obj.next_page_number }}">next</a></li>
+                                
+                            </ul>
+                        </div>
+                        
+                        <!-- END pagination -->
+                        {% endif %}
+                    </div>
+                    <div class="search-sidebar">
+                        
+                       
+                        <h4 class="title m-b-0">Categories</h4>
+                        <form action="#">
+                            {% for i in categories %}
+                            <div class="single-widget-category">
+                               <input type="checkbox" data-filter="category" id="{{i.id}}"  value="{{i.id}}" class="filter-checkbox">
+                               <label for="{{i.id}}">{{i.name}} </span></label>
+                            </div>
+                            {% endfor %}
+                        </form>
+                    </div>
+                    <div class="search-sidebar">
+                        
+                       
+                        <h4 class="">Filter By Color:</h4>
+                      
+                           
+                           <div class="product__color mt-20">
+                            <ul>
+                                {% for i in color %}
+                            <li>
+                                
+                                <a href="?colorID={{i.id}}" style="background-color:{{i.code}};">{{i.id}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                           </div>
+                           
+                      
+                        
+                    </div>
+                    <!-- END search-sidebar -->
+                </div>
+                <!-- END search-container -->
+            </div>
+            <!-- END container -->
+        </div>
+        <!-- END search-results -->
+                    <!-- END search-content -->
+                    <!-- BEGIN search-sidebar -->
+                    
+
+
+    </main>
+
+        {% endblock content %}
+        
