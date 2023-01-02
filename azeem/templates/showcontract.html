@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Azeem Enterprises</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href={% static 'public/assets/favicon.ico' %} />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href=" {% static '/css/styles.css' %} " rel="stylesheet" />
+        <link href=" {% static '/js/scripts.js' %} " rel="stylesheet" />
+    </head>
+
+  <div>
+    <img src="{% static 'logo.png' %}" class="rounded mx-auto d-block" alt="...">
+    <h1 class="text-center text-danger my-4">Showing Details Of Contracts:</h1>
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Contact</th>
+        <th scope="col">File</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+      </tr>
+    </thead>
+    {% for al in all %}
+    <tbody>
+      <tr>
+        <th scope="row">{{al.id}}</th>
+        <td> {{al.name}} </td>
+        <td>{{al.email}}</td>
+        <td>{{al.phone}}</td>
+        <td>{{al.file}}</td>
+        <td>{{al.price}}</td>
+        <td>{{al.desc}}</td>
+      </tr>
+      
+    </tbody>
+    {% endfor %}
+  </table>
+  <a href="{% url 'dashboard' %}"><button type="button" class="btn btn-outline-danger my-4">Back</button></a>
+</div>

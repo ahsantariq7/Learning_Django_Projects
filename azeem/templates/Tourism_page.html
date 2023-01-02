@@ -1,0 +1,78 @@
+{% load static %}
+{% block title %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link href=" {% static '/css/styles.css' %} " rel="stylesheet" />
+        <link href=" {% static '/js/scripts.js' %} " rel="stylesheet" />
+{% endblock title %}
+
+{% block body %}
+<div>
+<img src="{% static 'logo.png' %}" class="rounded mx-auto d-block" alt="...">
+
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+   
+    <a href="{% url 'tourism' %}"><button type="button" class="btn btn-outline-danger my-1 align-right">Apply Now</button></a>
+    <a href="{% url 'show_tourism' %}"><button type="button" class="btn btn-outline-danger my-1 align-right">My Bookings</button></a>
+  </div>
+     
+  <header class="masthead bg-image "
+  style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(1).jpg');
+  height: 100vh">
+      
+      <div class="container">
+          <div class="masthead-subheading">{% for al in all1 %}
+            {{al.title}}!</div>
+          <div class="masthead-heading text-uppercase">{{al.description}}.</div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Expected_Rate</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                
+                <td scope="row"> {{al.expected_rate}} </td>
+                
+                
+              </tr>
+              
+            </tbody>
+          </table>
+          
+
+          <div class="input-group">
+            <label for="route_from">Route To:</label>
+              
+          <select name="route_from" id="route_from">
+            {% for al in all3 %}
+            <option value="{{al.route_to}}">{{al.route_to}}</option>
+            
+            {% endfor %}
+          </select>
+            <span class="input-group-addon">--------</span>
+            <label for="route_from">Route From:</label>
+             
+          <select name="route_from" id="route_from">
+            {% for al in all2 %}
+            <option value="{{al.route_from}}">{{al.route_from}}</option>
+            
+            {% endfor %}
+          </select>
+          
+
+
+      </div>
+
+
+  </header>
+{% endfor %}
+
+  
+   
+
+
+
+
+{% endblock body %}

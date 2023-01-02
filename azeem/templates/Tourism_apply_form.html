@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+</head>
+<body>
+  <div>
+    <img src="{% static 'logo.png' %}" class="rounded mx-auto d-block" alt="...">
+</div>
+
+<div class="card shadow m-5">
+    <div class="card-body">
+        <h5 class="p-2 text-danger " style="bordder-bottom : 2x solid orange">Contract Details:</h5>
+
+    </div>
+    <div class="container my-4">
+    <form method="post" class="form-group">
+        {% csrf_token %}
+        <table>
+          Your username is "{{user.username}}" <hr>
+          Select Username :{{ form.user }}
+          
+          <div class="form-group my-3">
+            <label for="id_name">Name:</label>
+            <input type="text" name="name" class="form-control "  maxlength="100" required id="id_name">
+        </div>
+        <div class="form-group my-3">
+          <label for="id_email">Email:</label>
+          <input type="email" name="email" class="form-control is-invalid"  maxlength="120" required id="id_email">
+      </div>
+      <div class="form-group my-3">
+        <label for="id_phone">Phone:</label>
+    <input type="text" name="phone" class="form-control "  maxlength="50" required id="id_phone">
+    </div>
+    <div class="form-group my-3">
+      <label for="id_travel_date">Travel date:</label>
+      <input type="text" name="travel_date" class="form-control "  maxlength="40" required id="id_travel_date">
+      
+  </div>
+  <div class="form-group my-3">
+    <label for="id_persons">Persons:</label>
+    <input type="text" name="persons" class="form-control "  maxlength="120" required id="id_persons">
+</div>
+<div class="form-group my-3">
+  Select Route From :{{form.from_route}}
+</div>
+<div class="form-group my-3">
+ Select Route To: {{form.to_route}}
+</div>
+<div class="form-group my-3">
+  <label for="id_adult">Adult:</label>
+  <input type="text" name="adult" class="form-control "  maxlength="100" required id="id_adult">
+</div>
+<div class="form-group my-3">
+  <label for="id_child">Child:</label>
+  <input type="text" name="child" class="form-control "  maxlength="100" required id="id_child">
+</div>
+
+          <tr>
+            <td>&nbsp;</td>
+            <td><input type="submit" value="Submit"></td>
+          </tr>                
+        </table>
+      </form>
+</body>
+</html>

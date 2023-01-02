@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee's Verification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    <img src="{% static 'logo.png' %}" class="rounded mx-auto d-block" alt="...">
+    <h1 class="text-center text-danger my-4">Enter Employee's Verification Pin:</h1>
+    <form method="post" action="">
+        {% csrf_token %}
+        <div class="form-group text-danger fs-3">
+            <label for="name">Pin:</label>
+            <input type="text" class="form-control bg-danger" id="name" name="name" placeholder="Enter Employee's Pin" >
+        </div>
+            <div class="col-md-12 text-center">
+                <button type="submit" class="btn btn-outline-danger my-4">Check Pin</button>
+            </div>
+</body>
+</html>
